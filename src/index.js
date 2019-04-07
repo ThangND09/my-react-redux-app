@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducer from './reducers/index';
+//import reducer from './reducers/index';
+// import reminders123 from './reducers/index';
+import reducer from './reducers/combine';
 
 const store = createStore(reducer);
 

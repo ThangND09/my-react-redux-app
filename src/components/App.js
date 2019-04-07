@@ -13,19 +13,38 @@ class App extends Component {
     }
 
     addReminder() {
-        console.log('this.state', this.state);
-        console.log('this.props', this.props);
-        console.log('this', this);
         this.props.addReminder(this.state.text);
     }
 
+    renderReminder() {
+
+        console.log("this.props",this.props)
+        const { reminders } = this.props;
+        console.log("reminders",reminders)
+        return (
+            <ul className="list-group col-sm-4">
+                {
+                    reminders.map( reminder => {
+                        return (
+                            <li key={reminder.id} className="list-group-item">
+                                <div>{reminder.text}</div>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+        )
+    }
+
     render() {
+        // console.log("state in App:",this.state);
+        // console.log("props in App:",this.props);
         return(
             <div className="App">
                 <div className="title">
                     Reminder Pro
                 </div>
-
+                
                 <div className="form-inline">
                     <div className="form-group">
                         <input 
@@ -34,18 +53,29 @@ class App extends Component {
                         onChange={event => this.setState({text: event.target.value})}/>
                         
                     </div>
+                    
                     <button 
                     type="button" 
                     className="btn btn-success"
                     onClick={() => this.addReminder()}>Add remider</button>
                 </div>
+                {this.renderReminder()}
             </div>
         )
     }
 }
 
 function mapDispatchToProps(dispatch) {
+    // console.log("what is dispatch,", dispatch);
+    // console.log(addReminder);
     return bindActionCreators({addReminder}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps) (App);
+function mapStatetoProps(state) {
+    console.log("aaaaaaaa", state);
+    return {
+        reminders: state.reminders
+    }
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps) (App);

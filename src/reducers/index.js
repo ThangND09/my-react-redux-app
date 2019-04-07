@@ -12,7 +12,7 @@ const reminders = (state = [], action) => {
     switch (action.type) {
         case ADD_REMINDER:
             reminders = [...state, reminder(action)];
-            console.log('reminders as state', reminders);
+            console.log('reminders in reducers:', reminders);
             return reminders;
     
         default:
@@ -20,4 +20,18 @@ const reminders = (state = [], action) => {
     }
 }
 
+const reminders123 = (state = {name:"123"}, action) => {
+    let names = null;
+    switch (action.type) {
+        case ADD_REMINDER:
+            names = {nane: action.text};
+            console.log('names in reducers:', names);
+            return names;
+    
+        default:
+            return state;
+    }
+}
+
 export default reminders;
+export { reminders123 };
